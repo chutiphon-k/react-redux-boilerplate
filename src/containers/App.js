@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class Home extends Component {
+export default class App extends Component {
 	render(){
 		return (
 			<div>
-				Home
+				{this.props.children}
 			</div>
 		)
 	}

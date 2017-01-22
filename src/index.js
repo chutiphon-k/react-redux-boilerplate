@@ -1,5 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
-import Home from 'Home'
+import Root from 'Root'
 
-render(<Home />, document.getElementById('app'))
+const rootEl = document.getElementById('app')
+
+render(<Root />, rootEl)

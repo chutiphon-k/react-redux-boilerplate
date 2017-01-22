@@ -1,42 +1,25 @@
 const webpack = require('webpack')
 const path = require('path')
+const merge = require('webpack-merge')
 const DashboardPlugin = require('webpack-dashboard/plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const baseWebpackConfig = require('./webpack.base.config.js')
 
-module.exports = {
-	entry: [
-		path.resolve(__dirname, '../src/index.js')
-	],
-	output: {
-		path: path.resolve(__dirname, 'build'),
-		publicPath: '/build/',
-		filename: 'bundle.js'
-	},
-	resolve: {
-		modules: [
-			'src',
-			'node_modules'
-		],
-		extensions: ['.jsx', '.js']
-	},
-	resolveLoader: {
-		moduleExtensions: ["-loader"] 
-	},
-	module: {
-		rules: [
-			{
-				test: /\.(js|jsx)$/,
-				use: ['babel'],
-				include: path.resolve(__dirname, '../src')
-			}
-		]
-	},
+const projectRoot = path.resolve(__dirname, '../')
+
+module.exports = merge(baseWebpackConfig, {
 	plugins: [
-		new DashboardPlugin()
+		new DashboardPlugin(),
+		new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: path.resolve(projectRoot, 'public/index.html')
+		})
 	],
 	devServer: {
 		inline: true,
 		host: 'localhost',
 		port: 8080,
-		historyApiFallback: true
+		historyApiFallback: true,
+		quiet: true
 	}
-}
+})
