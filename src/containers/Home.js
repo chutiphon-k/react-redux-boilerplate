@@ -10,7 +10,7 @@ class Home extends Component {
 		return (
 			<div>
 				<div className="content">
-				<h1>Home</h1>
+				<h1>Homes</h1>
 					{ 
 						JSON.stringify(this.props.test)
 					}
@@ -19,7 +19,7 @@ class Home extends Component {
 					Load
 				</button>
 				<br />
-				<Link to='/about'>
+				<Link to='about/'>
 					<button className="button is-primary is-large">Button</button>
 				</Link>
 			</div>

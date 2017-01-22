@@ -7,7 +7,7 @@ export default class About extends Component {
 			<div>
 				About
 				<br />
-				<Link to='/'>
+				<Link to='eiei'>
 					<button className="button is-primary is-large">Button</button>
 				</Link>
 			</div>
