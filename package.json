@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dashboard -- webpack-dev-server --config ./config/webpack.dev.config.js",
-    "build": "webpack -p --config ./config/webpack.prod.config.js"
+    "build": "webpack -p --config ./config/webpack.prod.config.js",
+    "aaa": "webpack-dev-server --config ./webpack.config.js"
   },
   "dependencies": {
     "bulma": "^0.3.1",

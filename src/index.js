@@ -6,6 +6,21 @@ import Root from 'Root'
 const rootEl = document.getElementById('app')
 
 render(
-	<Root />,
+	<AppContainer>
+		<Root />
+	</AppContainer>,
 	rootEl
 )
+
+if (module.hot) {
+  module.hot.accept('Root', () => {
+    const NextRootApp = require('Root').default
+    
+    render(
+      <AppContainer>
+         <NextRootApp />
+      </AppContainer>,
+      rootEl
+    );
+  });
+}
