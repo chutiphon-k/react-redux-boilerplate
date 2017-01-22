@@ -7,12 +7,8 @@ const projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
 	entry: [
-		'react-hot-loader/patch',
-		'webpack-dev-server/client?http://localhost:8080',
-		'webpack/hot/only-dev-server',
 		'bulma/bulma.sass',
-		'font-awesome/css/font-awesome.min.css',
-		path.resolve(projectRoot, 'src/index.js')
+		'font-awesome/css/font-awesome.min.css'
 	],
 	output: {
 		path: path.resolve(projectRoot, 'build/static'),
@@ -78,7 +74,6 @@ module.exports = {
 			postcss: [autoprefixer()],
 	        context: __dirname,
 	      }
-	    }),
-	    new webpack.HotModuleReplacementPlugin()
+	    })
 	]
 }

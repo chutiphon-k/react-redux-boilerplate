@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'production'
+
 const webpack = require('webpack')
 const path = require('path')
 const merge = require('webpack-merge')
@@ -9,7 +11,10 @@ const baseWebpackConfig = require('./webpack.base.config.js')
 
 const projectRoot = path.resolve(__dirname, '../')
 
-module.exports = merge(baseWebpackConfig, {
+module.exports = merge.smart(baseWebpackConfig, {
+	entry: [
+		path.resolve(projectRoot, 'src/index.js')
+	],
 	plugins: [
 		new ProgressBarPlugin(),
 	    new webpack.optimize.UglifyJsPlugin({

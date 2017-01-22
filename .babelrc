@@ -9,6 +9,7 @@
           "locals": ["module"]
         }]
       }]]
-    }
+    },
+    "production": {}
   }
 }

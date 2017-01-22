@@ -19,7 +19,7 @@ class Home extends Component {
 					Load
 				</button>
 				<br />
-				<Link to='about/'>
+				<Link to='/about'>
 					<button className="button is-primary is-large">Button</button>
 				</Link>
 			</div>
