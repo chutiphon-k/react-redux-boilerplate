@@ -6,8 +6,8 @@
   "author": "Chutiphon.k <chutiphon.k@ku.th>",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dashboard -- webpack-dev-server --config ./config/webpack.dev.config.js",
-    "build": "webpack -p --config ./config/webpack.prod.config.js"
+    "dev": "NODE_ENV=development webpack-dashboard -- webpack-dev-server --config ./config/webpack.dev.config.js",
+    "build": "NODE_ENV=production webpack -p --config ./config/webpack.prod.config.js"
   },
   "dependencies": {
     "bulma": "^0.3.1",
