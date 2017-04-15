@@ -22,6 +22,16 @@ module.exports = merge.smart(baseWebpackConfig, {
 		}),
 	    new webpack.HotModuleReplacementPlugin()
 	],
+module: {
+		rules: [
+			{
+				test: /\.(js|jsx)$/,
+				use: ['babel', 'eslint'],
+				exclude: path.resolve(projectRoot, 'node_modules'),
+				include: path.resolve(projectRoot, 'src')
+			}
+		]
+	},
 	devServer: {
 		inline: false,
 		hot: true,
