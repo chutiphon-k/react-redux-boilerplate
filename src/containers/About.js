@@ -1,33 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 
 class About extends Component {
+	state = {}
 
-    state = {}
-
-	render(){
+	render () {
 		const { handleSubmit } = this.props
 		return (
 			<div>
-			    <form onSubmit={handleSubmit} className='form' action='javascript:void(0)'>
+				<form onSubmit={handleSubmit} className='form' action='javascript:void(0)'>
 					<Field name="dataInput" component="input" type="text" autoFocus />
 					<button
-				    	type='submit'
-				        className='button is-primary'>
-				        Search
-			    	</button>
-			    </form>
-			    Result : { this.props.dataInput }
+						type='submit'
+						className='button is-primary'>
+						Search
+					</button>
+				</form>
+				Result : { this.props.dataInput }
 			</div>
 		)
 	}
 }
-
-About = reduxForm({
-	form: 'aboutForm'
-})(About)
 
 const selector = formValueSelector('aboutForm')
 
@@ -36,7 +30,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-	onSubmit(value){
+	onSubmit (value) {
 		console.log(value)
 	}
 })
@@ -44,4 +38,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(About)
+)(reduxForm({
+	form: 'aboutForm'
+})(About))

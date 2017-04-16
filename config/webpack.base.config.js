@@ -22,7 +22,7 @@ module.exports = {
 		extensions: ['.jsx', '.js']
 	},
 	resolveLoader: {
-		moduleExtensions: ["-loader"] 
+		moduleExtensions: [ '-loader' ]
 	},
 	module: {
 		rules: [
@@ -31,49 +31,49 @@ module.exports = {
 				use: ['babel'],
 				exclude: path.resolve(projectRoot, 'node_modules'),
 				include: path.resolve(projectRoot, 'src')
-			},{
+			}, {
 				test: /\.css/,
 				use: [
-					'style', 
+					'style',
 					'css',
 					'postcss'
-				],
-			},{
+				]
+			}, {
 				test: /\.(scss|sass)$/,
 				use: [
 					'style',
 					'css',
 					'postcss',
 					'sass'
-				],
-			},{
+				]
+			}, {
 				test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-				use: "url?limit=10000&mimetype=application/font-woff"
-			},{
+				use: 'url?limit=10000&mimetype=application/font-woff'
+			}, {
 				test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-				use: "url?limit=10000&mimetype=application/font-woff"
-			},{
+				use: 'url?limit=10000&mimetype=application/font-woff'
+			}, {
 				test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-				use: "url?limit=10000&mimetype=application/octet-stream"
-			},{
+				use: 'url?limit=10000&mimetype=application/octet-stream'
+			}, {
 				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-				use: "file"
-			},{
+				use: 'file'
+			}, {
 				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-				use: "url?limit=10000&mimetype=image/svg+xml"
+				use: 'url?limit=10000&mimetype=image/svg+xml'
 			}
 		]
 	},
 	plugins: [
-		new CleanWebpackPlugin(['build','index.html'], {
-			root: projectRoot,
+		new CleanWebpackPlugin([ 'build', 'index.html' ], {
+			root: projectRoot
 		}),
-	    new webpack.DefinePlugin({}),
-	    new webpack.LoaderOptionsPlugin({
-	      options: {
-			postcss: [autoprefixer()],
-	        context: __dirname,
-	      }
-	    })
+		new webpack.DefinePlugin({}),
+		new webpack.LoaderOptionsPlugin({
+			options: {
+				postcss: [autoprefixer()],
+				context: __dirname
+			}
+		})
 	]
 }

@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": "standard",
+  "extends": ["standard"],
   "plugins": [
       "standard",
       "promise",
@@ -10,8 +10,10 @@
       "no-tabs": "off",        
       "indent": ["error", "tab", {"SwitchCase": 1}],
       "no-console": "warn",
+      "no-var": "error",      
       "react/jsx-uses-react": "error",
-      "react/jsx-uses-vars": "error"
+      "react/jsx-uses-vars": "error",
+      "react/jsx-space-before-closing": "error"
   },
   "parserOptions": {
     "ecmaVersion": 6,

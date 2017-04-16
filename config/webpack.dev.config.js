@@ -17,12 +17,12 @@ module.exports = merge.smart(baseWebpackConfig, {
 	plugins: [
 		new DashboardPlugin(),
 		new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: path.resolve(projectRoot, 'public/index.html')
+			filename: 'index.html',
+			template: path.resolve(projectRoot, 'public/index.html')
 		}),
-	    new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin()
 	],
-module: {
+	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
