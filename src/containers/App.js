@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import styles from 'stylesheets/main.scss'
-
+import styles from 'stylesheets/main.css'
+console.log(process.env.NODE_ENV)
 export default class App extends Component {
 	render () {
 		return (

@@ -18,7 +18,7 @@ module.exports = merge(baseWebpackConfig, {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
-				use: ['babel'],
+				use: 'babel?cacheDirectory',
 				exclude: path.resolve(projectRoot, 'node_modules'),
 				include: path.resolve(projectRoot, 'src')
 			}, {
@@ -98,10 +98,21 @@ module.exports = merge(baseWebpackConfig, {
 			threshold: 10240,
 			minRatio: 0.8
 		}),
+		new CompressionPlugin({
+			asset: "[path].gz[query]",
+			algorithm: "gzip",
+			test: /\.(js|html)$/,
+			threshold: 10240,
+			minRatio: 0.8
+		}),
 		new ExtractTextPlugin({
 			filename: '[name].[chunkhash].css',
 			allChunks: true,
 			ignoreOrder: true
+		}),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': '"production"',
+			__DEBUG__: 'false'
 		})
 	]
 })

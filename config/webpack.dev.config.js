@@ -58,7 +58,11 @@ module.exports = merge(baseWebpackConfig, {
 			filename: 'index.html',
 			template: path.resolve(projectRoot, 'public/index.html')
 		}),
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': '"development"',
+			__DEBUG__: 'true'
+		})
 	],
 	devServer: {
 		inline: false,
