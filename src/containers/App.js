@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import 'stylesheets/main.css'
+import styles from 'stylesheets/main.scss'
 
 export default class App extends Component {
 	render () {
 		return (
 			<div>
-				<h1 className='welcome'>Welcome</h1>
+				<h1 className={styles.welcome}>Welcome</h1>
 				{this.props.children}
 			</div>
 		)

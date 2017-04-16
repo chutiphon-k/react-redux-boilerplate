@@ -12,7 +12,8 @@ module.exports = merge(baseWebpackConfig, {
 	entry: [
 		'react-hot-loader/patch',
 		'webpack-dev-server/client?http://localhost:8080',
-		'webpack/hot/only-dev-server'
+		'webpack/hot/only-dev-server',
+		path.resolve(projectRoot, 'src/index.js')
 	],
 	module: {
 		rules: [
@@ -23,19 +24,31 @@ module.exports = merge(baseWebpackConfig, {
 				include: path.resolve(projectRoot, 'src')
 			}, {
 				test: /\.css$/,
-				use: [
-					'style',
-					'css',
-					'postcss'
-				]
+				use: [ 'style', {
+					loader: 'css',
+					options: {
+						modules: true,
+						localIdentName: '[path][name]__[local]--[hash:base64:5]'
+					}
+				}, 'postcss' ],
+				exclude: path.resolve(projectRoot, 'node_modules'),
+				include: path.resolve(projectRoot, 'src')
 			}, {
 				test: /\.(scss|sass)$/,
-				use: [
-					'style',
-					'css',
-					'postcss',
-					'sass'
-				]
+				use: [ 'style', {
+					loader: 'css',
+					options: {
+						modules: true,
+						localIdentName: '[name]__[local]___[hash:base64:5]'
+					}
+				}, 'postcss', 'sass' ],
+				exclude: path.resolve(projectRoot, 'node_modules'),
+				include: path.resolve(projectRoot, 'src')
+			}, {
+				test: /\.(css|scss|sass)$/,
+				use: [ 'style', 'css', 'postcss', 'sass' ],
+				exclude: path.resolve(projectRoot, 'src'),
+				include: path.resolve(projectRoot, 'node_modules')
 			}
 		]
 	},

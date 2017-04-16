@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
 import * as actions from 'actions'
+import styles from 'stylesheets/main.css'
 
 const { getTest } = actions
 
@@ -11,7 +12,7 @@ class Home extends Component {
 		return (
 			<div>
 				<div className="content">
-					<h1>Home</h1>
+					<h1 className={styles.welcome}>Home</h1>
 						{
 							JSON.stringify(this.props.test)
 						}

@@ -12,6 +12,7 @@ const projectRoot = path.resolve(__dirname, '../')
 
 module.exports = merge(baseWebpackConfig, {
 	entry: [
+		path.resolve(projectRoot, 'src/index.js')
 	],
 	module: {
 		rules: [
@@ -24,14 +25,45 @@ module.exports = merge(baseWebpackConfig, {
 				test: /\.css$/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style',
-					use: [ 'css', 'postcss' ]
-				})
+					use: [ {
+						loader: 'css',
+						options: {
+							modules: true,
+							minimize: true,
+							localIdentName: '[name]__[local]___[hash:base64:5]'
+						}
+					}, 'postcss' ]
+				}),
+				exclude: path.resolve(projectRoot, 'node_modules'),
+				include: path.resolve(projectRoot, 'src')
 			}, {
 				test: /\.(scss|sass)$/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
-					use: ['css', 'postcss', 'sass']
-				})
+					use: [ {
+						loader: 'css',
+						options: {
+							modules: true,
+							minimize: true,
+							localIdentName: '[name]__[local]___[hash:base64:5]'
+						}
+					}, 'postcss', 'sass' ]
+				}),
+				exclude: path.resolve(projectRoot, 'node_modules'),
+				include: path.resolve(projectRoot, 'src')
+			}, {
+				test: /\.(css|scss|sass)$/,
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: [ {
+						loader: 'css',
+						options: {
+							minimize: true
+						}
+					}, 'postcss', 'sass' ]
+				}),
+				exclude: path.resolve(projectRoot, 'src'),
+				include: path.resolve(projectRoot, 'node_modules')
 			}
 		]
 	},
@@ -68,7 +100,8 @@ module.exports = merge(baseWebpackConfig, {
 		}),
 		new ExtractTextPlugin({
 			filename: '[name].[chunkhash].css',
-			allChunks: true
+			allChunks: true,
+			ignoreOrder: true
 		})
 	]
 })
