@@ -111,8 +111,10 @@ module.exports = merge(baseWebpackConfig, {
 			ignoreOrder: true
 		}),
 		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': '"production"',
-			__DEBUG__: 'false'
+			__DEBUG__: 'true'
+		}),
+		new webpack.EnvironmentPlugin({
+			NODE_ENV: 'production'
 		})
 	]
 })

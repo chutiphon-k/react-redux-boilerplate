@@ -60,8 +60,10 @@ module.exports = merge(baseWebpackConfig, {
 		}),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': '"development"',
 			__DEBUG__: 'true'
+		}),
+		new webpack.EnvironmentPlugin({
+			NODE_ENV: 'development'
 		})
 	],
 	devServer: {
