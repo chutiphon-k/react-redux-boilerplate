@@ -4,14 +4,37 @@ const merge = require('webpack-merge')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 const baseWebpackConfig = require('./webpack.base.config.js')
 
 const projectRoot = path.resolve(__dirname, '../')
 
-module.exports = merge.smart(baseWebpackConfig, {
+module.exports = merge(baseWebpackConfig, {
 	entry: [
-		path.resolve(projectRoot, 'src/index.js')
 	],
+	module: {
+		rules: [
+			{
+				test: /\.(js|jsx)$/,
+				use: ['babel'],
+				exclude: path.resolve(projectRoot, 'node_modules'),
+				include: path.resolve(projectRoot, 'src')
+			}, {
+				test: /\.css$/,
+				use: ExtractTextPlugin.extract({
+					fallback: 'style',
+					use: [ 'css', 'postcss' ]
+				})
+			}, {
+				test: /\.(scss|sass)$/,
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: ['css', 'postcss', 'sass']
+				})
+			}
+		]
+	},
 	plugins: [
 		new ProgressBarPlugin(),
 		new webpack.optimize.UglifyJsPlugin({
@@ -42,6 +65,10 @@ module.exports = merge.smart(baseWebpackConfig, {
 			test: /\.js$|\.html$/,
 			threshold: 10240,
 			minRatio: 0.8
+		}),
+		new ExtractTextPlugin({
+			filename: '[name].[chunkhash].css',
+			allChunks: true
 		})
 	]
 })

@@ -8,7 +8,8 @@ const projectRoot = path.resolve(__dirname, '../')
 module.exports = {
 	entry: [
 		'bulma/bulma.sass',
-		'font-awesome/css/font-awesome.min.css'
+		'font-awesome/css/font-awesome.min.css',
+		path.resolve(projectRoot, 'src/index.js')
 	],
 	output: {
 		path: path.resolve(projectRoot, 'build/static'),
@@ -27,26 +28,6 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.(js|jsx)$/,
-				use: ['babel'],
-				exclude: path.resolve(projectRoot, 'node_modules'),
-				include: path.resolve(projectRoot, 'src')
-			}, {
-				test: /\.css/,
-				use: [
-					'style',
-					'css',
-					'postcss'
-				]
-			}, {
-				test: /\.(scss|sass)$/,
-				use: [
-					'style',
-					'css',
-					'postcss',
-					'sass'
-				]
-			}, {
 				test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
 				use: 'url?limit=10000&mimetype=application/font-woff'
 			}, {
