@@ -6,15 +6,27 @@ import {
 } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
-import About from 'containers/About'
-import App from 'containers/App'
-import Home from 'containers/Home'
-
 const routes = (store, history) => (
 	<Router history={syncHistoryWithStore(history, store)}>
-		<Route path='/' component={App}>
-			<IndexRoute component={Home} />
-			<route path='about' component={About} />
+		<Route path='/'
+			getComponent = { (location, cb) => {
+				System.import('containers/App')
+					.then((component) => {
+						cb(null, component.default || component)
+					})
+			}}>
+			<IndexRoute getComponent = { (location, cb) => {
+				System.import('containers/Home')
+					.then((component) => {
+						cb(null, component.default || component)
+					})
+			}} />
+			<Route path='about' getComponent = { (location, cb) => {
+				System.import('containers/About')
+					.then((component) => {
+						cb(null, component.default || component)
+					})
+			}} />
 		</Route>
 	</Router>
 )

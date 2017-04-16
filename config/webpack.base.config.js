@@ -11,8 +11,7 @@ module.exports = {
 		'font-awesome/css/font-awesome.min.css'
 	],
 	output: {
-		path: path.resolve(projectRoot, 'build/static'),
-		filename: 'bundle.js'
+		path: path.resolve(projectRoot, 'build/static')
 	},
 	resolve: {
 		modules: [

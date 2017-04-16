@@ -14,6 +14,11 @@ module.exports = merge(baseWebpackConfig, {
 	entry: [
 		path.resolve(projectRoot, 'src/index.js')
 	],
+	output: {
+		publicPath: '/static/',
+		filename: '[chunkhash].bundle.js',
+		chunkFilename: '[id].[chunkhash].chunk.js'
+	},
 	module: {
 		rules: [
 			{
@@ -70,6 +75,7 @@ module.exports = merge(baseWebpackConfig, {
 	plugins: [
 		new ProgressBarPlugin(),
 		new webpack.optimize.UglifyJsPlugin({
+			sourceMap: true,
 			minimize: true,
 			compress: {
 				drop_console: true,
@@ -98,13 +104,6 @@ module.exports = merge(baseWebpackConfig, {
 			threshold: 10240,
 			minRatio: 0.8
 		}),
-		new CompressionPlugin({
-			asset: "[path].gz[query]",
-			algorithm: "gzip",
-			test: /\.(js|html)$/,
-			threshold: 10240,
-			minRatio: 0.8
-		}),
 		new ExtractTextPlugin({
 			filename: '[name].[chunkhash].css',
 			allChunks: true,
@@ -115,6 +114,11 @@ module.exports = merge(baseWebpackConfig, {
 		}),
 		new webpack.EnvironmentPlugin({
 			NODE_ENV: 'production'
+		}),
+		new webpack.optimize.OccurrenceOrderPlugin(),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendor',
+			filename: 'vendor.[chunkhash].bundle.js'
 		})
 	]
 })

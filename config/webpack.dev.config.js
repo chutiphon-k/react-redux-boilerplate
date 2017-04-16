@@ -15,6 +15,9 @@ module.exports = merge(baseWebpackConfig, {
 		'webpack/hot/only-dev-server',
 		path.resolve(projectRoot, 'src/index.js')
 	],
+	output: {
+		filename: 'bundle.js'
+	},
 	module: {
 		rules: [
 			{
