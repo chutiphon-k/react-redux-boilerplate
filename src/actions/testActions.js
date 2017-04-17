@@ -2,7 +2,7 @@ import { CALL_API } from 'redux-api-middleware'
 
 export const getTest = () => dispatch => dispatch({
 	[CALL_API]: {
-		endpoint: `https://jsonplaceholder.typicode.com/posts/1`,
+		endpoint: `${process.env.API}/posts/1`,
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'

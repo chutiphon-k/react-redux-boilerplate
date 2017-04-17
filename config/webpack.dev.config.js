@@ -69,8 +69,10 @@ module.exports = merge(baseWebpackConfig, {
 			__DEBUG__: 'true'
 		}),
 		new webpack.EnvironmentPlugin({
-			NODE_ENV: 'development'
-		})
+			NODE_ENV: 'development',
+			API: 'https://jsonplaceholder.typicode.com'
+		}),
+		new webpack.NamedModulesPlugin()
 	],
 	devServer: {
 		inline: false,

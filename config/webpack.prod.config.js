@@ -122,7 +122,8 @@ module.exports = merge(baseWebpackConfig, {
 			__DEBUG__: 'false'
 		}),
 		new webpack.EnvironmentPlugin({
-			NODE_ENV: 'production'
+			NODE_ENV: 'production',
+			API: 'https://jsonplaceholder.typicode.com'
 		}),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.optimize.CommonsChunkPlugin({

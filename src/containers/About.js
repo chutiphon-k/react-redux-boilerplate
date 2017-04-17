@@ -36,7 +36,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	onSubmit (value) {
-		console.log(value)
+		// console.log(value)
 	}
 })
 
