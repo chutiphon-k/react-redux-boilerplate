@@ -5,6 +5,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const WebpackMd5Hash = require('webpack-md5-hash')
 
 const baseWebpackConfig = require('./webpack.base.config.js')
 
@@ -129,6 +130,7 @@ module.exports = merge(baseWebpackConfig, {
 		new webpack.LoaderOptionsPlugin({
 			minimize: true,
 			debug: false
-		})
+		}),
+		new WebpackMd5Hash()
 	]
 })
