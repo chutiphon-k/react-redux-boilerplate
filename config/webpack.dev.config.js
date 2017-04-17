@@ -18,6 +18,7 @@ module.exports = merge(baseWebpackConfig, {
 		path.resolve(projectRoot, 'src/index.js')
 	],
 	output: {
+		publicPath: '/static/',
 		filename: 'bundle.js'
 	},
 	module: {
@@ -79,7 +80,9 @@ module.exports = merge(baseWebpackConfig, {
 		hot: true,
 		host: 'localhost',
 		port: 8080,
-		historyApiFallback: true,
+		historyApiFallback: {
+			index: '/static/'
+		},
 		quiet: true
 	}
 })
