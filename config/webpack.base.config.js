@@ -6,10 +6,6 @@ const autoprefixer = require('autoprefixer')
 const projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
-	entry: [
-		'bulma/bulma.sass',
-		'font-awesome/css/font-awesome.min.css'
-	],
 	output: {
 		path: path.resolve(projectRoot, 'build/static')
 	},
@@ -47,7 +43,6 @@ module.exports = {
 		new CleanWebpackPlugin([ 'build', 'index.html' ], {
 			root: projectRoot
 		}),
-		new webpack.DefinePlugin({}),
 		new webpack.LoaderOptionsPlugin({
 			options: {
 				postcss: [autoprefixer()],

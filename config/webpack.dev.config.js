@@ -13,6 +13,8 @@ module.exports = merge(baseWebpackConfig, {
 		'react-hot-loader/patch',
 		'webpack-dev-server/client?http://localhost:8080',
 		'webpack/hot/only-dev-server',
+		'bulma/bulma.sass',
+		'font-awesome/css/font-awesome.min.css',
 		path.resolve(projectRoot, 'src/index.js')
 	],
 	output: {

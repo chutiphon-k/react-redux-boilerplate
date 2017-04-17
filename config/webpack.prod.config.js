@@ -11,9 +11,11 @@ const baseWebpackConfig = require('./webpack.base.config.js')
 const projectRoot = path.resolve(__dirname, '../')
 
 module.exports = merge(baseWebpackConfig, {
-	entry: [
-		path.resolve(projectRoot, 'src/index.js')
-	],
+	entry: {
+		bundle: path.resolve(projectRoot, 'src/index.js'),
+		vendor: [ 'react', 'redux' ],
+		style: [ 'bulma/bulma.sass', 'font-awesome/css/font-awesome.min.css' ]
+	},
 	output: {
 		publicPath: '/static/',
 		filename: '[chunkhash].bundle.js',
@@ -110,7 +112,7 @@ module.exports = merge(baseWebpackConfig, {
 			ignoreOrder: true
 		}),
 		new webpack.DefinePlugin({
-			__DEBUG__: 'true'
+			__DEBUG__: 'false'
 		}),
 		new webpack.EnvironmentPlugin({
 			NODE_ENV: 'production'
@@ -118,7 +120,15 @@ module.exports = merge(baseWebpackConfig, {
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor',
-			filename: 'vendor.[chunkhash].bundle.js'
+			filename: 'vendor.[chunkhash].bundle.js',
+			children: true,
+			minChunks: function (module) {
+				return module.context && module.context.indexOf('node_modules') !== -1
+			}
+		}),
+		new webpack.LoaderOptionsPlugin({
+			minimize: true,
+			debug: false
 		})
 	]
 })
