@@ -12,7 +12,6 @@
   "dependencies": {
     "bulma": "^0.3.1",
     "font-awesome": "^4.7.0",
-    "re-bulma": "^0.2.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
@@ -50,6 +49,7 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.26.0",
+    "inline-manifest-webpack-plugin": "^3.0.1",
     "node-sass": "^4.3.0",
     "postcss-loader": "^1.2.2",
     "progress-bar-webpack-plugin": "^1.9.3",
@@ -62,7 +62,7 @@
     "webpack": "^2.4.1",
     "webpack-dashboard": "^0.2.1",
     "webpack-dev-server": "^2.4.2",
-    "webpack-md5-hash": "^0.0.5",
+    "webpack-manifest-plugin": "^1.1.0",
     "webpack-merge": "^4.1.0"
   }
 }

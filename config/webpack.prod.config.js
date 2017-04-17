@@ -5,16 +5,21 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const WebpackMd5Hash = require('webpack-md5-hash')
+const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 
 const baseWebpackConfig = require('./webpack.base.config.js')
+const packageDotJson = require('../package.json')
 
 const projectRoot = path.resolve(__dirname, '../')
+const ignorePackage = ['font-awesome', 'bulma']
 
 module.exports = merge(baseWebpackConfig, {
 	entry: {
 		bundle: path.resolve(projectRoot, 'src/index.js'),
-		vendor: [ 'react', 'redux' ],
+		vendor: Object.keys(packageDotJson.dependencies).filter(function (el) {
+			return !ignorePackage.includes(el)
+		}),
 		style: [ 'bulma/bulma.sass', 'font-awesome/css/font-awesome.min.css' ]
 	},
 	output: {
@@ -90,6 +95,7 @@ module.exports = merge(baseWebpackConfig, {
 			}
 		}),
 		new HtmlWebpackPlugin({
+			title: 'React Redux Boilerplate',
 			filename: path.resolve(projectRoot, 'build/index.html'),
 			template: path.resolve(projectRoot, 'public/index.html'),
 			minify: {
@@ -122,15 +128,24 @@ module.exports = merge(baseWebpackConfig, {
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor',
 			filename: 'vendor.[chunkhash].bundle.js',
-			children: true,
 			minChunks: function (module) {
 				return module.context && module.context.indexOf('node_modules') !== -1
 			}
 		}),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'manifest',
+			minChunks: Infinity
+		}),
+		new ManifestPlugin({
+			filename: 'manifest.json',
+			manifestVariable: 'webpackManifest'
+		}),
+		new InlineManifestWebpackPlugin({
+			name: 'webpackManifest'
+		}),
 		new webpack.LoaderOptionsPlugin({
 			minimize: true,
 			debug: false
-		}),
-		new WebpackMd5Hash()
+		})
 	]
 })

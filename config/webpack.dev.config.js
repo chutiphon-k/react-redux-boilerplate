@@ -60,6 +60,7 @@ module.exports = merge(baseWebpackConfig, {
 	plugins: [
 		new DashboardPlugin(),
 		new HtmlWebpackPlugin({
+			title: 'React Redux Boilerplate',
 			filename: 'index.html',
 			template: path.resolve(projectRoot, 'public/index.html')
 		}),
