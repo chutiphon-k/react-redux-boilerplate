@@ -1,12 +1,12 @@
 # React Redux Boilerplate
 
-> A React project
+> A simple boilerplate for building web application with React and Redux
 
 ## Package
 - React
 - Redux
 - Redux Form
-- Webpack 2
+- Webpack
 - Babel
 - Bulma
 
